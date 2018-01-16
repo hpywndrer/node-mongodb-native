@@ -101,10 +101,6 @@ MongoClient.connect('mongodb://localhost:27017/test', (err, client) => {
 });
 ```
 
-`Collection.prototype.aggregate` now returns a cursor if a callback is provided. It used to return
-the resulting documents which is the same as calling `cursor.toArray()` on the cursor we now pass to
-the callback.
-
 ## Other Changes
 
 Below are more updates to the driver in the 3.0.0 release.
@@ -177,7 +173,14 @@ in on the options object . Additionally, `find` does not support individual opti
 `limit` as positional parameters. You must either pass in these parameters in the `options` object,
 or add them via `Cursor` methods like `Cursor.prototype.skip`.
 
-### Aggregation
+### `aggregate`
+
+`Collection.prototype.aggregate` no longer accepts variadic arguments. Pipeline stages
+are now only accepted as an `Array` of stages as the first argument.
+
+`Collection.prototype.aggregate` now returns a cursor if a callback is provided. It used to return
+the resulting documents which is the same as calling `cursor.toArray()` on the cursor we now pass to
+the callback.
 
 Support added for `comment` in the aggregation command. Support also added for a `hint` field in the
 aggregation `options`.
